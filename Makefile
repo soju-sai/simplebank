@@ -16,4 +16,7 @@ migrateup:
 migratedown:
 	migrate -path db/migration -database "postgresql://${SIMPLEBANK_USERNAME}:${SIMPLEBANK_PASSWORD}@localhost:5432/simple_bank?sslmode=disable" -verbose down
 
-.PHONY: dockerup createdb dropdb migrateup migratedown
+sqlc:
+	sqlc generate
+
+.PHONY: dockerup createdb dropdb migrateup migratedown sqlc
