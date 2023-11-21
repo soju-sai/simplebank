@@ -1,22 +1,25 @@
-include .env
+include app.env
 export
 
 dockerup:
-	docker run --name postgres16 -e POSTGRES_USER=${SIMPLEBANK_USERNAME} -e POSTGRES_PASSWORD=${SIMPLEBANK_PASSWORD} -p 5432:5432 -d postgres:16-alpine
+	docker run --name postgres16 -e POSTGRES_USER=${DB_USERNAME} -e POSTGRES_PASSWORD=${DB_PASSWORD} -p 5432:5432 -d postgres:16-alpine
 
 createdb:
-	docker exec -it postgres16 createdb --owner=${SIMPLEBANK_USERNAME} --username=${SIMPLEBANK_USERNAME} simple_bank "A database acts as a bank db"
+	docker exec -it postgres16 createdb --owner=${DB_USERNAME} --username=${DB_USERNAME} simple_bank "A database acts as a bank db"
 
 dropdb:
-	docker exec -it postgres16 dropdb --username=${SIMPLEBANK_USERNAME} simple_bank
+	docker exec -it postgres16 dropdb --username=${DB_USERNAME} simple_bank
 
 migrateup:
-	migrate -path db/migration -database "postgresql://${SIMPLEBANK_USERNAME}:${SIMPLEBANK_PASSWORD}@localhost:5432/simple_bank?sslmode=disable" -verbose up
+	migrate -path db/migration -database ${DB_SOURCE} -verbose up
 
 migratedown:
-	migrate -path db/migration -database "postgresql://${SIMPLEBANK_USERNAME}:${SIMPLEBANK_PASSWORD}@localhost:5432/simple_bank?sslmode=disable" -verbose down
+	migrate -path db/migration -database ${DB_SOURCE} -verbose down
 
 sqlc:
 	sqlc generate
 
-.PHONY: dockerup createdb dropdb migrateup migratedown sqlc
+test:
+	go test -v -cover ./...
+
+.PHONY: dockerup createdb dropdb migrateup migratedown sqlc test
