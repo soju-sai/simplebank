@@ -36,7 +36,7 @@ func TestCreateAccount(t *testing.T) {
 
 func TestGetAccount(t *testing.T) {
 	acct1 := createRandomAccount(t)
-	acct2, err := testQueries.GetAccount(context.Background(), acct1.ID)
+	acct2, err := testQueries.GetAccountForUpdate(context.Background(), acct1.ID)
 	require.NoError(t, err)
 	require.NotEmpty(t, acct2)
 
@@ -85,6 +85,6 @@ func TestDeleteAccount(t *testing.T) {
 	err := testQueries.DeleteAccount(context.Background(), account.ID)
 	require.NoError(t, err)
 
-	account2, _ := testQueries.GetAccount(context.Background(), account.ID)
+	account2, _ := testQueries.GetAccountForUpdate(context.Background(), account.ID)
 	require.Empty(t, account2)
 }

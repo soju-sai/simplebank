@@ -98,10 +98,10 @@ func TestTransferTx(t *testing.T) {
 	}
 
 	// check final transfered balance result
-	updatedFromAccount, err := testQueries.GetAccount(context.Background(), account1.ID)
+	updatedFromAccount, err := testQueries.GetAccountForUpdate(context.Background(), account1.ID)
 	require.NoError(t, err)
 
-	updatedToAccount, err := testQueries.GetAccount(context.Background(), account2.ID)
+	updatedToAccount, err := testQueries.GetAccountForUpdate(context.Background(), account2.ID)
 	require.NoError(t, err)
 
 	fmt.Println(">> after:", updatedFromAccount.Balance, updatedToAccount.Balance)
