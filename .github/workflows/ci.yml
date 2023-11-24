@@ -11,8 +11,9 @@ on:
 
 jobs:
 
-  build:
+  test:
     runs-on: ubuntu-latest
+    environment: ci-test-environment
     steps:
     - uses: actions/checkout@v3
 
