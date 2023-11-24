@@ -1,6 +1,3 @@
-include app.env
-export
-
 dockerup:
 	docker run --name postgres16 -e POSTGRES_USER=${DB_USERNAME} -e POSTGRES_PASSWORD=${DB_PASSWORD} -p 5432:5432 -d postgres:16-alpine
 
