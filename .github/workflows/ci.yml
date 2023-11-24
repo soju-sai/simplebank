@@ -24,3 +24,9 @@ jobs:
 
     - name: Test
       run: make test
+      env:
+        DB_DRIVER: ${{ vars.DB_DRIVER }}
+        DB_SOURCE: ${{ vars.DB_SOURCE }}
+        DB_USERNAME: ${{ vars.DB_USERNAME }}
+        DB_USERPASSWORD: ${{ vars.DB_USERPASSWORD }}
+        SERVER_ADDRESS: ${{ vars.SERVER_ADDRESS }}
