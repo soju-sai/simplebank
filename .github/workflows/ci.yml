@@ -14,6 +14,17 @@ jobs:
   test:
     runs-on: ubuntu-latest
     environment: ci-test-environment
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_PASSWORD: ${{ vars.DB_USERPASSWORD }}
+          POSTGRES_USER: ${{ vars.DB_USERNAME }}
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
     steps:
     - uses: actions/checkout@v3
 
@@ -21,6 +32,9 @@ jobs:
       uses: actions/setup-go@v4.1.0
       with:
         go-version: '1.21'
+    
+    - name: Migrate up
+      run: make migrationup
 
     - name: Test
       run: make test
