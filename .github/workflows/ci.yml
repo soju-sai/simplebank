@@ -18,8 +18,6 @@ jobs:
           POSTGRES_PASSWORD: ${{ vars.DB_USERPASSWORD }}
           POSTGRES_USER: ${{ vars.DB_USERNAME }}
           POSTGRES_DB: simple_bank
-          POSTGRES_PORT: 5432
-          POSTGRES_HOST: postgres16
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
@@ -46,8 +44,6 @@ jobs:
       run: make migrateup
       env:
         DB_SOURCE: ${{ vars.DB_SOURCE }}
-        POSTGRES_HOST: postgres16
-        POSTGRES_PORT: 5432
 
     - name: Test
       run: make test
