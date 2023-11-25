@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: ci-test-environment
     services:
-      postgres:
+      postgres16:
         image: postgres:16
         env:
           POSTGRES_PASSWORD: ${{ vars.DB_USERPASSWORD }}
