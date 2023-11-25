@@ -42,6 +42,8 @@ jobs:
 
     - name: Migrate up
       run: make migrateup
+      env:
+        DB_SOURCE: ${{ vars.DB_SOURCE }}
 
     - name: Test
       run: make test
