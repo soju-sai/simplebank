@@ -14,7 +14,6 @@ jobs:
     services:
       postgres16:
         image: postgres:16
-        name: postgres16
         env:
           POSTGRES_PASSWORD: ${{ vars.DB_USERPASSWORD }}
           POSTGRES_USER: ${{ vars.DB_USERNAME }}
