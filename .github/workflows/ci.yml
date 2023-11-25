@@ -14,6 +14,7 @@ jobs:
     services:
       postgres16:
         image: postgres:16
+        name: postgres16
         env:
           POSTGRES_PASSWORD: ${{ vars.DB_USERPASSWORD }}
           POSTGRES_USER: ${{ vars.DB_USERNAME }}
@@ -43,6 +44,8 @@ jobs:
       run: make migrateup
       env:
         DB_SOURCE: ${{ vars.DB_SOURCE }}
+        POSTGRES_HOST: postgres16
+        POSTGRES_PORT: 5432
 
     - name: Test
       run: make test
