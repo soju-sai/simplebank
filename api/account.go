@@ -27,6 +27,10 @@ type updateAccountRequest struct {
 	Balance int64 `json:"balance" binding:"required,min=0"`
 }
 
+type deleteAccountRequest struct {
+	ID int64 `uri:"id" binding:"required,min=1"`
+}
+
 func (server *Server) createAccount(ctx *gin.Context) {
 	var req createAccountRequest
 	if err := ctx.ShouldBindJSON(&req); err != nil {
@@ -109,4 +113,21 @@ func (server *Server) UpdateAccount(ctx *gin.Context) {
 	}
 
 	ctx.JSON(http.StatusOK, account)
+}
+
+// TODO: delete without foreign key constrain error
+func (server *Server) DeleteAccount(ctx *gin.Context) {
+	var req deleteAccountRequest
+	if err := ctx.ShouldBindUri(&req); err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error:": err.Error()})
+		return
+	}
+	arg := req.ID
+	err := server.store.DeleteAccount(ctx, arg)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
+		return
+	}
+
+	ctx.JSON(http.StatusOK, "")
 }
