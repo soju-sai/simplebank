@@ -22,4 +22,7 @@ test:
 server:
 	go run main.go
 
-.PHONY: dockerup createdb dropdb migrateup migratedown sqlc test server
+mockdb:
+	mockgen -package mockdb -destination db/mock/store.go github.com/techschool/simplebank/db/sqlc Store
+
+.PHONY: dockerup createdb dropdb migrateup migratedown sqlc test server mockdb
