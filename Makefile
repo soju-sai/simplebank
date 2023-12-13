@@ -13,6 +13,12 @@ migrateup:
 migratedown:
 	migrate -path db/migration -database ${DB_SOURCE} -verbose down
 
+migrateup1:
+	migrate -path db/migration -database ${DB_SOURCE} -verbose up 1
+
+migratedown1:
+	migrate -path db/migration -database ${DB_SOURCE} -verbose down 1
+
 sqlc:
 	sqlc generate
 
@@ -25,4 +31,4 @@ server:
 mockdb:
 	mockgen -package mockdb -destination db/mock/store.go github.com/techschool/simplebank/db/sqlc Store
 
-.PHONY: dockerup createdb dropdb migrateup migratedown sqlc test server mockdb
+.PHONY: dockerup createdb dropdb migrateup migratedown sqlc test server mockdb migrateup1 migratedown1
