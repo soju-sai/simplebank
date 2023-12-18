@@ -96,7 +96,7 @@ func TestCreateUserAPI(t *testing.T) {
 			require.NoError(t, err)
 
 			// Send request and check for the response in recorder
-			server := NewServer(store)
+			server := newTestServer(t, store)
 			server.router.ServeHTTP(recorder, req)
 			tc.checkResponse(recorder)
 		})
