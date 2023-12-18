@@ -53,3 +53,5 @@ jobs:
         DB_USERNAME: ${{ vars.DB_USERNAME }}
         DB_USERPASSWORD: ${{ vars.DB_USERPASSWORD }}
         SERVER_ADDRESS: ${{ vars.SERVER_ADDRESS }}
+        SYMMETRIC_KEY: ${{ vars.SYMMETRIC_KEY }}
+        TOKEN_DURATION: ${{ vars.TOKEN_DURATION }}
