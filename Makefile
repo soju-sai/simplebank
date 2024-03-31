@@ -1,5 +1,5 @@
-dockerup:
-	docker run --name postgres16 -e POSTGRES_USER=${DB_USERNAME} -e POSTGRES_PASSWORD=${DB_PASSWORD} -p 5432:5432 -d postgres:16-alpine
+postgres:
+	docker run --name postgres16 --network bank-network -e POSTGRES_USER=${DB_USERNAME} -e POSTGRES_PASSWORD=${DB_PASSWORD} -p 5432:5432 -d postgres:16-alpine
 
 createdb:
 	docker exec -it postgres16 createdb --owner=${DB_USERNAME} --username=${DB_USERNAME} simple_bank "A database acts as a bank db"
