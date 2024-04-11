@@ -16,8 +16,6 @@ type Config struct {
 }
 
 func LoadConfig(path string) (config Config, err error) {
-	viper.SetDefault("DB_USERNAME", "")
-	viper.SetDefault("DB_USERPASSWORD", "")
 	viper.SetDefault("DB_DRIVER", "")
 	viper.SetDefault("DB_SOURCE", "")
 	viper.SetDefault("SERVER_ADDRESS", "")
